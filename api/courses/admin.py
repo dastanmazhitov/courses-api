@@ -4,5 +4,5 @@ from .models import *
 
 admin.site.register(Category)
 admin.site.register(Course)
-# admin.site.register(Branch)
-# admin.site.register(Contact)
+admin.site.register(Branch)
+admin.site.register(Contact)
