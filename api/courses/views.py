@@ -12,14 +12,14 @@ class CourseList(APIView):
     def get(self, request):
         category = Category.objects.all()
         course = Course.objects.all()
-        branch = Course.objects.all()
+        branch = Branch.objects.all()
         contact = Contact.objects.all()
         category_serializer = CategorySerializer(category, many=True)
         course_serializer = CourseSerializer(course, many=True)
         contact_serializer = ContactSerializer(contact, many=True)
         branch_serializer = BranchSerializer(branch, many=True)
 
-        response = category_serializer.data + branch_serializer.data + contact_serializer.data + branch_serializer.data
+        response = course_serializer.data + category_serializer.data  + contact_serializer.data + branch_serializer.data
 
         return Response(response)
 
