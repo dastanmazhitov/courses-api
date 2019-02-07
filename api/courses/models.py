@@ -10,7 +10,7 @@ class Category(models.Model):
 
 
 class Course(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='course_category', null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
     logo = models.CharField(max_length=1000)
@@ -20,7 +20,7 @@ class Course(models.Model):
 
 
 class Branch(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='branch_course', null=True)
+    course = models.ForeignKey(Course, related_name='branches',on_delete=models.CASCADE, null=True)
     latitude = models.CharField(max_length=1000)
     longtitude = models.CharField(max_length=1000)
     address = models.CharField(max_length=1000)
@@ -35,9 +35,9 @@ class Contact(models.Model):
     (2, "FACEBOOK"),
     (3, "EMAIL"),
     )
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='contact_course', null=True)
+    course = models.ForeignKey(Course, related_name='contacts',on_delete=models.CASCADE, null=True)
     type = models.IntegerField(choices=CHOISES, default=1)
-    value = models.CharField(max_length=20)
+    value = models.CharField(max_length=100)
 
     def __str__(self):
         return self.value

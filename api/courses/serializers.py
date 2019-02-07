@@ -2,25 +2,19 @@ from rest_framework import serializers
 from .models import *
 
 
-class CourseSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Course
-        fields = '__all__'
-
 
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'
+        exclude = ('id', )
 
 
 class BranchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Branch
-        fields = '__all__'
+        exclude = ('id', 'course')
 
 
 
@@ -28,4 +22,13 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = '__all__'
+        exclude = ('id', 'course')
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    branches = BranchSerializer(many=True)
+    contacts = ContactSerializer(many=True)
+
+    class Meta:
+        model = Course
+        fields = ('id', 'name', 'description', 'category', 'logo', 'contacts', 'branches')
