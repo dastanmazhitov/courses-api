@@ -22,7 +22,7 @@ class Course(models.Model):
 class Branch(models.Model):
     course = models.ForeignKey(Course, related_name='branches',on_delete=models.CASCADE, null=True)
     latitude = models.CharField(max_length=1000)
-    longtitude = models.CharField(max_length=1000)
+    longitude = models.CharField(max_length=1000)
     address = models.CharField(max_length=1000)
 
     def __str__(self):

@@ -15,12 +15,12 @@ class CourseList(APIView):
         return Response(course_serializer.data)
 
     def post(self, request, format=None):
-        serializer = CourseSerializer(request.data)
+        serializer = CourseSerializer(data=request.data)
         if serializer.is_valid():
             instance = serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CourseById(APIView):
@@ -33,4 +33,4 @@ class CourseById(APIView):
 
     def delete(self, request, course_id):
         Course.objects.filter(pk=course_id).delete()
-        return Response(serializer.data, status=status.HTTP_2HTTP_200_OK)
+        return HttpResponse()
