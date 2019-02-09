@@ -19,6 +19,10 @@ class BranchSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
+    type = serializers.SerializerMethodField()
+
+    def get_type(self, obj):
+        return obj.get_type_display()
 
     class Meta:
         model = Contact
