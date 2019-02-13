@@ -15,4 +15,16 @@ by using PIP
 ```
 pip install -r requirements.txt
 ```
-https://courseapi6.docs.apiary.io/#
+
+### Installing
+Download or clone API source code. Setup virtualevnirement or make it global. Install all packages
+from requirements.txt 
+
+
+# Documentation 
+You can find [Documentation](https://courseapi6.docs.apiary.io/#) in this host:
+
+# Authors 
+ - [Atalov Eldos](https://github.com/MrBrother)
+ 
+ 
