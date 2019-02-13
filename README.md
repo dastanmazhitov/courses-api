@@ -4,7 +4,7 @@ You can use this API for storing any type of courses. You can post and get cours
 information.
 
 ## Getting Started 
-These instructions will get you a copy of the project up and runnig on your local mas
+These instructions will get you a copy of the project up and runnig on your local
 machine for development and testing purpose. 
 
 ### Prerequisites 
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 ### Installing
 Download or clone API source code. Setup virtualevnirement or make it global. Install all packages
-from requirements.txt 
+from requirements.txt. And read Documentation for 
 
 
 # Documentation 
