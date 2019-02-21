@@ -3,7 +3,6 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import *
-import json
 
 
 class CategoryTest(TestCase):
@@ -66,10 +65,41 @@ class CourseTest(TestCase):
             course_two.logo, "/test2/logo2.img"
         )
 
-#
+
+class BranchTest(TestCase):
+    def setUp(self):
+        Branch.objects.create(
+            latitude="111",
+            longitude="222",
+            address="Bishkek",
+        )
+
+    def test_branch(self):
+        branch = Branch.objects.get(latitude='111')
+
+        self.assertEqual(
+            branch.longitude, '222'
+        )
+
+class ContactTest(TestCase):
+
+    def setUp(self):
+        Contact.objects.create(
+            type = 1,
+            value = '777000777'
+        )
+
+    def test_contact(self):
+        cont = Contact.objects.get(value='777000777')
+
+        self.assertEqual(
+            cont.type, 1
+        )
+
+
 # class CoursePostTest(APITestCase):
 #
-#     print(Category.objects.all())
+#
 #     def test_create_course(self):
 #         url = reverse('courses')
 #         data = {
@@ -105,9 +135,11 @@ class CourseTest(TestCase):
 #                   ]
 #                 }
 #         response = self.client.post(url, data, format='json')
+#         print()
 #         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 #         self.assertEqual(Course.objects.count(), 1)
 #         self.assertEqual(Course.objects.get().name, 'English Zone')
+#
 
 class CourseGetTest(APITestCase):
 
@@ -116,6 +148,19 @@ class CourseGetTest(APITestCase):
         url = reverse('courses')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        dt = json.loads(response.data)
-        for i in dt:
-            print(i)
+
+
+class CourseGetByIdTest(APITestCase):
+
+    def test_get_by_id(self):
+        response = self.client.get('/courses/1/')
+        print("Get By Id STATUS: " + str(response.status_code))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class CourseDeleteByIdTest(APITestCase):
+
+    def test_delete_by_id(self):
+        response = self.client.delete('/courses/1/')
+        print("Delete By Id STATUS: " + str(response.status_code))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
